@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package case02;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case02;case02";
+
+message OneOfMsg {
+  oneof required {
+    option (validate.required) = true;
+    float a = 1;
+    float b = 2;
+  }
+  oneof n {
+    float c = 3;
+    float d = 4;
+  }
+}

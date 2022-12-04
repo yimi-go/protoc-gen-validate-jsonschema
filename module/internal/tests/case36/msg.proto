@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package case36;
+
+import "google/protobuf/struct.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case36;case36";
+
+message ListValueTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.ListValue desc = 1;
+  google.protobuf.ListValue no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.ListValue blank_rule = 3 [(validate.rules) = {
+    timestamp: {}
+  }];
+  google.protobuf.ListValue required = 4 [(validate.rules) = {
+    message: {required: true}
+  }];
+}

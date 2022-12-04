@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package case23;
+
+import "google/protobuf/wrappers.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case23;case23";
+
+message DoubleWrapperTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.DoubleValue desc = 1;
+  google.protobuf.DoubleValue no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.DoubleValue blank_rule = 3 [(validate.rules) = {
+    double: {}
+  }];
+  google.protobuf.DoubleValue const = 4 [(validate.rules) = {
+    double: {const: 1}
+  }];
+  google.protobuf.DoubleValue lt = 5 [(validate.rules) = {
+    double: {lt: 10}
+  }];
+  google.protobuf.DoubleValue lte = 6 [(validate.rules) = {
+    double: {lte: 10}
+  }];
+  google.protobuf.DoubleValue lt_lt_lte = 7 [(validate.rules) = {
+    double: {
+      lt: 9,
+      lte: 10
+    }
+  }];
+  google.protobuf.DoubleValue lt_eq_lte = 8 [(validate.rules) = {
+    double: {
+      lt: 10,
+      lte: 10
+    }
+  }];
+  google.protobuf.DoubleValue lt_gt_lte = 9 [(validate.rules) = {
+    double: {
+      lt: 11,
+      lte: 10
+    }
+  }];
+  google.protobuf.DoubleValue gt = 10 [(validate.rules) = {
+    double: {gt: 10}
+  }];
+  google.protobuf.DoubleValue gte = 11 [(validate.rules) = {
+    double: {gte: 10}
+  }];
+  google.protobuf.DoubleValue gt_lt_gte = 12 [(validate.rules) = {
+    double: {
+      gt: 9,
+      gte: 10
+    }
+  }];
+  google.protobuf.DoubleValue gt_eq_gte = 13 [(validate.rules) = {
+    double: {
+      gt: 10,
+      gte: 10
+    }
+  }];
+  google.protobuf.DoubleValue gt_gt_gte = 14 [(validate.rules) = {
+    double: {
+      gt: 11,
+      gte: 10
+    }
+  }];
+  google.protobuf.DoubleValue in = 15 [(validate.rules) = {
+    double: {
+      in: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  }];
+  google.protobuf.DoubleValue not_in = 16 [(validate.rules) = {
+    double: {
+      not_in: [
+        7,
+        8,
+        9
+      ]
+    }
+  }];
+}

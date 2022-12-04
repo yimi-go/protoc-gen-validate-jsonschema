@@ -1,0 +1,91 @@
+package case36
+
+import (
+	"bytes"
+	"encoding/json"
+	"testing"
+
+	"github.com/spf13/afero"
+	"github.com/stretchr/testify/assert"
+	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/pluginpb"
+
+	"github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/base"
+)
+
+func TestListValue(t *testing.T) {
+	base.FrameTest(t, "msg.pb.bin", func(t *testing.T, fs afero.Fs, res *bytes.Buffer) {
+		resp := &pluginpb.CodeGeneratorResponse{}
+		err := proto.Unmarshal(res.Bytes(), resp)
+		if err != nil {
+			t.Fatal(err)
+		}
+		assert.Len(t, resp.GetFile(), 1)
+
+		file := resp.GetFile()[0]
+		assert.NotNil(t, file)
+		assert.Equal(t,
+			"github.com/yimi-go/protoc-gen-validate-jsonschema"+
+				"/module/internal/tests/case36/msg.pb.ListValueTestMsg.schema.json",
+			file.GetName())
+		t.Logf("\n%s", file.GetContent())
+		type schema struct {
+			Type        any                `json:"type"`
+			Properties  map[string]*schema `json:"properties"`
+			Required    []string           `json:"required"`
+			Description string             `json:"description"`
+			Items       *schema            `json:"items"`
+		}
+		type schemaFile struct {
+			Schema      string            `json:"$schema"`
+			Ref         string            `json:"$ref"`
+			Definitions map[string]schema `json:"definitions"`
+		}
+		var sf schemaFile
+		err = json.Unmarshal([]byte(file.GetContent()), &sf)
+		if err != nil {
+			t.Fatal(err)
+		}
+		assert.Equal(t, "http://json-schema.org/draft-04/schema#", sf.Schema)
+		assert.Equal(t, "#/definitions/case36.ListValueTestMsg", sf.Ref)
+		assert.NotEmpty(t, sf.Definitions)
+		ms, ok := sf.Definitions["case36.ListValueTestMsg"]
+		if !ok {
+			t.Fatal("missing root msg def")
+		}
+		assert.Equal(t, "object", ms.Type)
+
+		{
+			prop, ok := ms.Properties["desc"]
+			assert.True(t, ok)
+			assert.NotNil(t, prop)
+			assert.Equal(t, "array", prop.Type)
+			assert.NotNil(t, prop.Items)
+
+			assert.Equal(t, "aaa\n\nbbb", prop.Description)
+		}
+		{
+			prop, ok := ms.Properties["noRule"]
+			assert.True(t, ok)
+			assert.NotNil(t, prop)
+			assert.Equal(t, "array", prop.Type)
+			assert.NotNil(t, prop.Items)
+		}
+		{
+			prop, ok := ms.Properties["blankRule"]
+			assert.True(t, ok)
+			assert.NotNil(t, prop)
+			assert.Equal(t, "array", prop.Type)
+			assert.NotNil(t, prop.Items)
+		}
+		{
+			prop, ok := ms.Properties["required"]
+			assert.True(t, ok)
+			assert.NotNil(t, prop)
+			assert.Equal(t, "array", prop.Type)
+			assert.NotNil(t, prop.Items)
+
+			assert.Contains(t, ms.Required, "required")
+		}
+	})
+}

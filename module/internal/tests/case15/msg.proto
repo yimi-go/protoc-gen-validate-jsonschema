@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package case15;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case15;case15";
+
+message BoolTestMsg {
+  // aaa
+  //
+  // bbb
+  bool desc = 1;
+  bool no_rule = 2 [(validate.rules) = {}];
+  bool blank_rule = 3 [(validate.rules) = {
+    bool: {}
+  }];
+  bool const = 4 [(validate.rules) = {
+    bool: {const: true}
+  }];
+}

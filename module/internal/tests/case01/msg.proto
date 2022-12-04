@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package case01;
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case01;case01";
+
+// Title
+//
+// desc bala bala
+message DescMsg {}

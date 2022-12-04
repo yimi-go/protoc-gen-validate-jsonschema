@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package case31;
+
+import "google/protobuf/duration.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case31;case31";
+
+message DurationTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.Duration desc = 1;
+  google.protobuf.Duration no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.Duration blank_rule = 3 [(validate.rules) = {
+    duration: {}
+  }];
+  google.protobuf.Duration required = 4 [(validate.rules) = {
+    duration: {required: true}
+  }];
+  google.protobuf.Duration in = 5 [(validate.rules) = {
+    duration: {
+      in: [
+        {seconds: 60},
+        {
+          seconds: 1,
+          nanos: 500000000
+        }
+      ]
+    }
+  }];
+  google.protobuf.Duration not_in = 6 [(validate.rules) = {
+    duration: {
+      not_in: [
+        {seconds: 60},
+        {
+          seconds: 1,
+          nanos: 500000000
+        }
+      ]
+    }
+  }];
+  google.protobuf.Duration const = 7 [(validate.rules) = {
+    duration: {
+      const: {seconds: 60}
+    }
+  }];
+  google.protobuf.Duration lt = 8 [(validate.rules) = {
+    duration: {
+      lt: {seconds: 60}
+    }
+  }];
+  google.protobuf.Duration lte = 9 [(validate.rules) = {
+    duration: {
+      lte: {seconds: 60}
+    }
+  }];
+  google.protobuf.Duration gt = 10 [(validate.rules) = {
+    duration: {
+      gt: {seconds: 60}
+    }
+  }];
+  google.protobuf.Duration gte = 11 [(validate.rules) = {
+    duration: {
+      gte: {seconds: 60}
+    }
+  }];
+}

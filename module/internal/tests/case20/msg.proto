@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package case20;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case20;case20";
+
+message MapTestMsg {
+  // aaa
+  //
+  // bbb
+  map<string, sint64> desc = 1;
+  map<string, fixed32> no_rule = 2 [(validate.rules) = {}];
+  map<string, fixed64> blank_rule = 3 [(validate.rules) = {
+    map: {}
+  }];
+  map<string, sfixed32> max_pairs = 4 [(validate.rules) = {
+    map: {max_pairs: 5}
+  }];
+  map<string, sfixed64> min_pairs = 5 [(validate.rules) = {
+    map: {min_pairs: 5}
+  }];
+  map<string, bool> values = 6 [(validate.rules) = {
+    map: {
+      values: {
+        bool: {const: true}
+      }
+    }
+  }];
+  map<string, E3> evs = 7 [(validate.rules) = {
+    map: {
+      values: {
+        enum: {
+          in: [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    }
+  }];
+  message Nested {
+    string value = 1 [(validate.rules) = {
+      string: {pattern: "^a.*z$"}
+    }];
+  }
+  map<string, Nested> mvs = 8;
+}
+
+enum E3 {
+  E3_UNSPECIFIED = 0;
+  E3_ONE = 1;
+  E3_TWO = 2;
+  E3_THREE = 3;
+  E3_FOUR = 4;
+  E3_FIVE = 5;
+}

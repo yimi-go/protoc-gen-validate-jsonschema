@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package case04;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case04;case04";
+
+message DoubleTestMsg {
+  // aaa
+  //
+  // bbb
+  double desc = 1;
+  double no_rule = 2 [(validate.rules) = {}];
+  double blank_rule = 3 [(validate.rules) = {
+    double: {}
+  }];
+  double const = 4 [(validate.rules) = {
+    double: {const: 1}
+  }];
+  double lt = 5 [(validate.rules) = {
+    double: {lt: 10}
+  }];
+  double lte = 6 [(validate.rules) = {
+    double: {lte: 10}
+  }];
+  double lt_lt_lte = 7 [(validate.rules) = {
+    double: {
+      lt: 9,
+      lte: 10
+    }
+  }];
+  double lt_eq_lte = 8 [(validate.rules) = {
+    double: {
+      lt: 10,
+      lte: 10
+    }
+  }];
+  double lt_gt_lte = 9 [(validate.rules) = {
+    double: {
+      lt: 11,
+      lte: 10
+    }
+  }];
+  double gt = 10 [(validate.rules) = {
+    double: {gt: 10}
+  }];
+  double gte = 11 [(validate.rules) = {
+    double: {gte: 10}
+  }];
+  double gt_lt_gte = 12 [(validate.rules) = {
+    double: {
+      gt: 9,
+      gte: 10
+    }
+  }];
+  double gt_eq_gte = 13 [(validate.rules) = {
+    double: {
+      gt: 10,
+      gte: 10
+    }
+  }];
+  double gt_gt_gte = 14 [(validate.rules) = {
+    double: {
+      gt: 11,
+      gte: 10
+    }
+  }];
+  double in = 15 [(validate.rules) = {
+    double: {
+      in: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  }];
+  double not_in = 16 [(validate.rules) = {
+    double: {
+      not_in: [
+        7,
+        8,
+        9
+      ]
+    }
+  }];
+}

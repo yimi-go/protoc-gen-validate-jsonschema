@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package case33;
+
+import "google/protobuf/empty.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case33;case33";
+
+message EmptyTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.Empty desc = 1;
+  google.protobuf.Empty no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.Empty blank_rule = 3 [(validate.rules) = {
+    timestamp: {}
+  }];
+  google.protobuf.Empty required = 4 [(validate.rules) = {
+    message: {required: true}
+  }];
+}

@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+package case16;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case16;case16";
+
+message StringTestMsg {
+  // aaa
+  //
+  // bbb
+  string desc = 1;
+  string no_rule = 2 [(validate.rules) = {}];
+  string blank_rule = 3 [(validate.rules) = {
+    string: {}
+  }];
+  string const = 4 [(validate.rules) = {
+    string: {const: "abc"}
+  }];
+  string min_len = 5 [(validate.rules) = {
+    string: {min_len: 3}
+  }];
+  string len = 6 [(validate.rules) = {
+    string: {len: 5}
+  }];
+  string min_len_lt_len = 7 [(validate.rules) = {
+    string: {
+      min_len: 4,
+      len: 5,
+    }
+  }];
+  string min_len_eq_len = 8 [(validate.rules) = {
+    string: {
+      min_len: 5,
+      len: 5,
+    }
+  }];
+  string min_len_gt_len = 9 [(validate.rules) = {
+    string: {
+      min_len: 6,
+      len: 5,
+    }
+  }];
+  string max_len = 10 [(validate.rules) = {
+    string: {max_len: 5}
+  }];
+  string max_len_lt_len = 11 [(validate.rules) = {
+    string: {
+      max_len: 4,
+      len: 5,
+    }
+  }];
+  string max_len_eq_len = 12 [(validate.rules) = {
+    string: {
+      max_len: 5,
+      len: 5,
+    }
+  }];
+  string max_len_gt_len = 13 [(validate.rules) = {
+    string: {
+      max_len: 6,
+      len: 5,
+    }
+  }];
+  string len_bytes = 14 [(validate.rules) = {
+    string: {len_bytes: 5}
+  }];
+  string min_bytes = 15 [(validate.rules) = {
+    string: {min_bytes: 5}
+  }];
+  string min_bytes_lt_len_bytes = 16 [(validate.rules) = {
+    string: {
+      min_bytes: 4,
+      len_bytes: 5,
+    }
+  }];
+  string min_bytes_eq_len_bytes = 17 [(validate.rules) = {
+    string: {
+      min_bytes: 5,
+      len_bytes: 5,
+    }
+  }];
+  string min_bytes_gt_len_bytes = 18 [(validate.rules) = {
+    string: {
+      min_bytes: 6,
+      len_bytes: 5,
+    }
+  }];
+  string max_bytes = 19 [(validate.rules) = {
+    string: {max_bytes: 5}
+  }];
+  string max_bytes_lt_len_bytes = 20 [(validate.rules) = {
+    string: {
+      max_bytes: 4,
+      len_bytes: 5,
+    }
+  }];
+  string max_bytes_eq_len_bytes = 21 [(validate.rules) = {
+    string: {
+      max_bytes: 5,
+      len_bytes: 5,
+    }
+  }];
+  string max_bytes_gt_len_bytes = 22 [(validate.rules) = {
+    string: {
+      max_bytes: 6,
+      len_bytes: 5,
+    }
+  }];
+  string pattern = 23 [(validate.rules) = {
+    string: {pattern: "a.*b"}
+  }];
+  string prefix = 24 [(validate.rules) = {
+    string: {prefix: "a*"}
+  }];
+  string suffix = 25 [(validate.rules) = {
+    string: {suffix: ".z"}
+  }];
+  string contains = 26 [(validate.rules) = {
+    string: {contains: "(op)q"}
+  }];
+  string prefix_suffix = 27 [(validate.rules) = {
+    string: {
+      prefix: "a",
+      suffix: "z"
+    }
+  }];
+  string not_contains = 28 [(validate.rules) = {
+    string: {not_contains: "z*z"}
+  }];
+  string in = 29 [(validate.rules) = {
+    string: {
+      in: [
+        "a",
+        "b",
+        "c"
+      ]
+    }
+  }];
+  string not_in = 30 [(validate.rules) = {
+    string: {
+      not_in: [
+        "x",
+        "y",
+        "z"
+      ]
+    }
+  }];
+  string not_in_not_contains = 31 [(validate.rules) = {
+    string: {
+      not_in: ["a", "b"],
+      not_contains: "xyz"
+    }
+  }];
+  string email = 32 [(validate.rules) = {
+    string: {email: true}
+  }];
+  string hostname = 33 [(validate.rules) = {
+    string: {hostname: true}
+  }];
+  string ip = 34 [(validate.rules) = {
+    string: {ip: true}
+  }];
+  string ipv4 = 35 [(validate.rules) = {
+    string: {ipv4: true}
+  }];
+  string ipv6 = 36 [(validate.rules) = {
+    string: {ipv6: true}
+  }];
+  string uri = 37 [(validate.rules) = {
+    string: {uri: true}
+  }];
+  string uri_ref = 38 [(validate.rules) = {
+    string: {uri_ref: true}
+  }];
+  string address = 39 [(validate.rules) = {
+    string: {address: true}
+  }];
+  string uuid = 40 [(validate.rules) = {
+    string: {uuid: true}
+  }];
+  string well_known_regex_http_header_name = 41 [(validate.rules) = {
+    string: {well_known_regex: HTTP_HEADER_NAME}
+  }];
+  string well_known_regex_http_header_value = 42 [(validate.rules) = {
+    string: {well_known_regex: HTTP_HEADER_VALUE}
+  }];
+  string well_known_regex_unknown = 43 [(validate.rules) = {
+    string: {well_known_regex: UNKNOWN}
+  }];
+  string strict = 44 [(validate.rules) = {
+    string: {strict: true}
+  }];
+}

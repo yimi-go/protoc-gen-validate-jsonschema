@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package case11;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case11;case11";
+
+message Fixed32TestMsg {
+  // aaa
+  //
+  // bbb
+  fixed32 desc = 1;
+  fixed32 no_rule = 2 [(validate.rules) = {}];
+  fixed32 blank_rule = 3 [(validate.rules) = {
+    fixed32: {}
+  }];
+  fixed32 const = 4 [(validate.rules) = {
+    fixed32: {const: 1}
+  }];
+  fixed32 lt = 5 [(validate.rules) = {
+    fixed32: {lt: 10}
+  }];
+  fixed32 lte = 6 [(validate.rules) = {
+    fixed32: {lte: 10}
+  }];
+  fixed32 lt_lt_lte = 7 [(validate.rules) = {
+    fixed32: {
+      lt: 9,
+      lte: 10
+    }
+  }];
+  fixed32 lt_eq_lte = 8 [(validate.rules) = {
+    fixed32: {
+      lt: 10,
+      lte: 10
+    }
+  }];
+  fixed32 lt_gt_lte = 9 [(validate.rules) = {
+    fixed32: {
+      lt: 11,
+      lte: 10
+    }
+  }];
+  fixed32 gt = 10 [(validate.rules) = {
+    fixed32: {gt: 10}
+  }];
+  fixed32 gte = 11 [(validate.rules) = {
+    fixed32: {gte: 10}
+  }];
+  fixed32 gt_lt_gte = 12 [(validate.rules) = {
+    fixed32: {
+      gt: 9,
+      gte: 10
+    }
+  }];
+  fixed32 gt_eq_gte = 13 [(validate.rules) = {
+    fixed32: {
+      gt: 10,
+      gte: 10
+    }
+  }];
+  fixed32 gt_gt_gte = 14 [(validate.rules) = {
+    fixed32: {
+      gt: 11,
+      gte: 10
+    }
+  }];
+  fixed32 in = 15 [(validate.rules) = {
+    fixed32: {
+      in: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  }];
+  fixed32 not_in = 16 [(validate.rules) = {
+    fixed32: {
+      not_in: [
+        7,
+        8,
+        9
+      ]
+    }
+  }];
+}

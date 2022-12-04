@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package case21;
+
+import "google/protobuf/any.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case21;case21";
+
+message AnyTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.Any desc = 1;
+  google.protobuf.Any no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.Any blank_rule = 3 [(validate.rules) = {
+    any: {}
+  }];
+  google.protobuf.Any required = 4 [(validate.rules) = {
+    any: {required: true}
+  }];
+  google.protobuf.Any in = 5 [(validate.rules) = {
+    any: {
+      in: [
+        "a/b",
+        "a/c"
+      ]
+    }
+  }];
+  google.protobuf.Any not_in = 6 [(validate.rules) = {
+    any: {
+      not_in: [
+        "x/y",
+        "x/z"
+      ]
+    }
+  }];
+}

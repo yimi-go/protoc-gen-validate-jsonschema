@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package case38;
+
+import "google/protobuf/field_mask.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case38;case38";
+
+message FieldMaskTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.FieldMask desc = 1;
+  google.protobuf.FieldMask no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.FieldMask blank_rule = 3 [(validate.rules) = {
+    timestamp: {}
+  }];
+  google.protobuf.FieldMask required = 4 [(validate.rules) = {
+    message: {required: true}
+  }];
+}

@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+package case22;
+
+import "google/protobuf/wrappers.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case22;case22";
+
+message FloatWrapperTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.FloatValue desc = 1;
+  google.protobuf.FloatValue no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.FloatValue blank_rule = 3 [(validate.rules) = {
+    float: {}
+  }];
+  google.protobuf.FloatValue const = 4 [(validate.rules) = {
+    float: {const: 1}
+  }];
+  google.protobuf.FloatValue lt = 5 [(validate.rules) = {
+    float: {lt: 10}
+  }];
+  google.protobuf.FloatValue lte = 6 [(validate.rules) = {
+    float: {lte: 10}
+  }];
+  google.protobuf.FloatValue lt_lt_lte = 7 [(validate.rules) = {
+    float: {
+      lt: 9,
+      lte: 10
+    }
+  }];
+  google.protobuf.FloatValue lt_eq_lte = 8 [(validate.rules) = {
+    float: {
+      lt: 10,
+      lte: 10
+    }
+  }];
+  google.protobuf.FloatValue lt_gt_lte = 9 [(validate.rules) = {
+    float: {
+      lt: 11,
+      lte: 10
+    }
+  }];
+  google.protobuf.FloatValue gt = 10 [(validate.rules) = {
+    float: {gt: 10}
+  }];
+  google.protobuf.FloatValue gte = 11 [(validate.rules) = {
+    float: {gte: 10}
+  }];
+  google.protobuf.FloatValue gt_lt_gte = 12 [(validate.rules) = {
+    float: {
+      gt: 9,
+      gte: 10
+    }
+  }];
+  google.protobuf.FloatValue gt_eq_gte = 13 [(validate.rules) = {
+    float: {
+      gt: 10,
+      gte: 10
+    }
+  }];
+  google.protobuf.FloatValue gt_gt_gte = 14 [(validate.rules) = {
+    float: {
+      gt: 11,
+      gte: 10
+    }
+  }];
+  google.protobuf.FloatValue in = 15 [(validate.rules) = {
+    float: {
+      in: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  }];
+  google.protobuf.FloatValue not_in = 16 [(validate.rules) = {
+    float: {
+      not_in: [
+        7,
+        8,
+        9
+      ]
+    }
+  }];
+}

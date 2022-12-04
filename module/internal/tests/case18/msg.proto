@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package case18;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case18;case18";
+
+message EnumTestMsg {
+  // aaa
+  //
+  // bbb
+  E1 desc = 1;
+  E1 no_rule = 2 [(validate.rules) = {}];
+  E1 blank_rule = 3 [(validate.rules) = {
+    enum: {}
+  }];
+  E1 const = 4 [(validate.rules) = {
+    enum: {const: 3}
+  }];
+  E1 in = 5 [(validate.rules) = {
+    enum: {
+      in: [
+        1,
+        2,
+        10
+      ]
+    }
+  }];
+  E1 not_in = 6 [(validate.rules) = {
+    enum: {
+      not_in: [
+        4,
+        5,
+        6
+      ]
+    }
+  }];
+  E1 in_not_in = 7 [(validate.rules) = {
+    enum: {
+      in: [
+        1,
+        2,
+        3
+      ],
+      not_in: [
+        3,
+        4,
+        5
+      ]
+    }
+  }];
+}
+
+enum E1 {
+  E1_UNSPECIFIED = 0;
+  E1_ONE = 1;
+  E1_TWO = 2;
+  E1_THREE = 3;
+  E1_FOUR = 4;
+  E1_FIVE = 5;
+}

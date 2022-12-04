@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package case39;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case39;case39";
+
+message MsgTestMsg {
+  message Nested {
+    string abc = 1;
+  }
+  // aaa
+  //
+  // bbb
+  Nested desc = 1;
+  Nested no_rule = 2 [(validate.rules) = {}];
+  Nested blank_rule = 3 [(validate.rules) = {
+    timestamp: {}
+  }];
+  Nested required = 4 [(validate.rules) = {
+    message: {required: true}
+  }];
+}

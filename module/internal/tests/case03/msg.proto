@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package case03;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case03;case03";
+
+message FloatTestMsg {
+  // aaa
+  //
+  // bbb
+  float desc = 1;
+  float no_rule = 2 [(validate.rules) = {}];
+  float blank_rule = 3 [(validate.rules) = {
+    float: {}
+  }];
+  float const = 4 [(validate.rules) = {
+    float: {const: 1}
+  }];
+  float lt = 5 [(validate.rules) = {
+    float: {lt: 10}
+  }];
+  float lte = 6 [(validate.rules) = {
+    float: {lte: 10}
+  }];
+  float lt_lt_lte = 7 [(validate.rules) = {
+    float: {
+      lt: 9,
+      lte: 10
+    }
+  }];
+  float lt_eq_lte = 8 [(validate.rules) = {
+    float: {
+      lt: 10,
+      lte: 10
+    }
+  }];
+  float lt_gt_lte = 9 [(validate.rules) = {
+    float: {
+      lt: 11,
+      lte: 10
+    }
+  }];
+  float gt = 10 [(validate.rules) = {
+    float: {gt: 10}
+  }];
+  float gte = 11 [(validate.rules) = {
+    float: {gte: 10}
+  }];
+  float gt_lt_gte = 12 [(validate.rules) = {
+    float: {
+      gt: 9,
+      gte: 10
+    }
+  }];
+  float gt_eq_gte = 13 [(validate.rules) = {
+    float: {
+      gt: 10,
+      gte: 10
+    }
+  }];
+  float gt_gt_gte = 14 [(validate.rules) = {
+    float: {
+      gt: 11,
+      gte: 10
+    }
+  }];
+  float in = 15 [(validate.rules) = {
+    float: {
+      in: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  }];
+  float not_in = 16 [(validate.rules) = {
+    float: {
+      not_in: [
+        7,
+        8,
+        9
+      ]
+    }
+  }];
+}

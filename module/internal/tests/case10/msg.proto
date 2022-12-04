@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package case10;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case10;case10";
+
+message SInt64TestMsg {
+  // aaa
+  //
+  // bbb
+  sint64 desc = 1;
+  sint64 no_rule = 2 [(validate.rules) = {}];
+  sint64 blank_rule = 3 [(validate.rules) = {
+    sint64: {}
+  }];
+  sint64 const = 4 [(validate.rules) = {
+    sint64: {const: 1}
+  }];
+  sint64 lt = 5 [(validate.rules) = {
+    sint64: {lt: 10}
+  }];
+  sint64 lte = 6 [(validate.rules) = {
+    sint64: {lte: 10}
+  }];
+  sint64 lt_lt_lte = 7 [(validate.rules) = {
+    sint64: {
+      lt: 9,
+      lte: 10
+    }
+  }];
+  sint64 lt_eq_lte = 8 [(validate.rules) = {
+    sint64: {
+      lt: 10,
+      lte: 10
+    }
+  }];
+  sint64 lt_gt_lte = 9 [(validate.rules) = {
+    sint64: {
+      lt: 11,
+      lte: 10
+    }
+  }];
+  sint64 gt = 10 [(validate.rules) = {
+    sint64: {gt: 10}
+  }];
+  sint64 gte = 11 [(validate.rules) = {
+    sint64: {gte: 10}
+  }];
+  sint64 gt_lt_gte = 12 [(validate.rules) = {
+    sint64: {
+      gt: 9,
+      gte: 10
+    }
+  }];
+  sint64 gt_eq_gte = 13 [(validate.rules) = {
+    sint64: {
+      gt: 10,
+      gte: 10
+    }
+  }];
+  sint64 gt_gt_gte = 14 [(validate.rules) = {
+    sint64: {
+      gt: 11,
+      gte: 10
+    }
+  }];
+  sint64 in = 15 [(validate.rules) = {
+    sint64: {
+      in: [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  }];
+  sint64 not_in = 16 [(validate.rules) = {
+    sint64: {
+      not_in: [
+        7,
+        8,
+        9
+      ]
+    }
+  }];
+}

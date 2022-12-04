@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package case32;
+
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case32;case32";
+
+message TimestampTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.Timestamp desc = 1;
+  google.protobuf.Timestamp no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.Timestamp blank_rule = 3 [(validate.rules) = {
+    timestamp: {}
+  }];
+  google.protobuf.Timestamp required = 4 [(validate.rules) = {
+    timestamp: {required: true}
+  }];
+  google.protobuf.Timestamp const = 5 [(validate.rules) = {
+    timestamp: {
+      const: {seconds: 1668859200/*2022-11-19 20:00:00*/}
+    }
+  }];
+  google.protobuf.Timestamp lt = 6 [(validate.rules) = {
+    timestamp: {
+      lt: {seconds: 1668859200/*2022-11-19 20:00:00*/}
+    }
+  }];
+  google.protobuf.Timestamp lte = 7 [(validate.rules) = {
+    timestamp: {
+      lte: {seconds: 1668859200/*2022-11-19 20:00:00*/}
+    }
+  }];
+  google.protobuf.Timestamp gt = 8 [(validate.rules) = {
+    timestamp: {
+      gt: {seconds: 1668859200/*2022-11-19 20:00:00*/}
+    }
+  }];
+  google.protobuf.Timestamp gte = 9 [(validate.rules) = {
+    timestamp: {
+      gte: {seconds: 1668859200/*2022-11-19 20:00:00*/}
+    }
+  }];
+  google.protobuf.Timestamp within = 10 [(validate.rules) = {
+    timestamp: {
+      within: {seconds: 600}
+    }
+  }];
+  google.protobuf.Timestamp lt_now = 11 [(validate.rules) = {
+    timestamp: {
+      within: {seconds: 600},
+      lt_now: true
+    }
+  }];
+  google.protobuf.Timestamp gt_now = 12 [(validate.rules) = {
+    timestamp: {
+      within: {seconds: 600},
+      gt_now: true
+    }
+  }];
+  google.protobuf.Timestamp lt_now_only = 13 [(validate.rules) = {
+    timestamp: {
+      lt_now: true
+    }
+  }];
+  google.protobuf.Timestamp gt_now_only = 14 [(validate.rules) = {
+    timestamp: {
+      gt_now: true
+    }
+  }];
+}

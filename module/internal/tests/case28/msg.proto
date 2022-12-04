@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package case28;
+
+import "google/protobuf/wrappers.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case28;case28";
+
+message BoolWrapperTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.BoolValue desc = 1;
+  google.protobuf.BoolValue no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.BoolValue blank_rule = 3 [(validate.rules) = {
+    bool: {}
+  }];
+  google.protobuf.BoolValue const = 4 [(validate.rules) = {
+    bool: {const: true}
+  }];
+}

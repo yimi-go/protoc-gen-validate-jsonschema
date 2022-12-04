@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package case19;
+
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case19;case19";
+
+message RepeatedTestMsg {
+  // aaa
+  //
+  // bbb
+  repeated float desc = 1;
+  repeated double no_rule = 2 [(validate.rules) = {}];
+  repeated int32 blank_rule = 3 [(validate.rules) = {
+    repeated: {}
+  }];
+  repeated int64 max_items = 4 [(validate.rules) = {
+    repeated: {max_items: 3}
+  }];
+  repeated uint32 min_items = 5 [(validate.rules) = {
+    repeated: {min_items: 3}
+  }];
+  repeated uint64 unique = 6 [(validate.rules) = {
+    repeated: {unique: true}
+  }];
+  repeated sint32 si32 = 7 [(validate.rules) = {
+    repeated: {
+      items: {
+        sint32: {
+          in: [
+            1,
+            2
+          ]
+        }
+      }
+    }
+  }];
+  repeated E2 es = 8 [(validate.rules) = {
+    repeated: {
+      unique: true,
+      items: {
+        enum: {
+          in: [
+            2,
+            3
+          ]
+        }
+      }
+    }
+  }];
+  message Nested {
+    int32 value = 1 [(validate.rules) = {
+      int32: {gt: 1}
+    }];
+  }
+  repeated Nested ms = 9;
+}
+
+enum E2 {
+  E2_UNSPECIFIED = 0;
+  E2_ONE = 1;
+  E2_TWO = 2;
+  E2_THREE = 3;
+  E2_FOUR = 4;
+  E2_FIVE = 5;
+}

@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package case30;
+
+import "google/protobuf/wrappers.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/yimi-go/protoc-gen-validate-jsonschema/module/internal/tests/case30;case30";
+
+message BytesWrapperTestMsg {
+  // aaa
+  //
+  // bbb
+  google.protobuf.BytesValue desc = 1;
+  google.protobuf.BytesValue no_rule = 2 [(validate.rules) = {}];
+  google.protobuf.BytesValue blank_rule = 3 [(validate.rules) = {
+    bytes: {}
+  }];
+  google.protobuf.BytesValue const = 4 [(validate.rules) = {
+    bytes: {const: "abc"}
+  }];
+  google.protobuf.BytesValue min_len = 5 [(validate.rules) = {
+    bytes: {min_len: 3}
+  }];
+  google.protobuf.BytesValue len = 6 [(validate.rules) = {
+    bytes: {len: 5}
+  }];
+  google.protobuf.BytesValue min_len_lt_len = 7 [(validate.rules) = {
+    bytes: {
+      min_len: 4,
+      len: 5,
+    }
+  }];
+  google.protobuf.BytesValue min_len_eq_len = 8 [(validate.rules) = {
+    bytes: {
+      min_len: 5,
+      len: 5,
+    }
+  }];
+  google.protobuf.BytesValue min_len_gt_len = 9 [(validate.rules) = {
+    bytes: {
+      min_len: 6,
+      len: 5,
+    }
+  }];
+  google.protobuf.BytesValue max_len = 10 [(validate.rules) = {
+    bytes: {max_len: 5}
+  }];
+  google.protobuf.BytesValue max_len_lt_len = 11 [(validate.rules) = {
+    bytes: {
+      max_len: 4,
+      len: 5,
+    }
+  }];
+  google.protobuf.BytesValue max_len_eq_len = 12 [(validate.rules) = {
+    bytes: {
+      max_len: 5,
+      len: 5,
+    }
+  }];
+  google.protobuf.BytesValue max_len_gt_len = 13 [(validate.rules) = {
+    bytes: {
+      max_len: 6,
+      len: 5,
+    }
+  }];
+  google.protobuf.BytesValue pattern = 23 [(validate.rules) = {
+    bytes: {pattern: "a.*b"}
+  }];
+  google.protobuf.BytesValue prefix = 24 [(validate.rules) = {
+    bytes: {prefix: "a*"}
+  }];
+  google.protobuf.BytesValue suffix = 25 [(validate.rules) = {
+    bytes: {suffix: ".z"}
+  }];
+  google.protobuf.BytesValue contains = 26 [(validate.rules) = {
+    bytes: {contains: "(op)q"}
+  }];
+  google.protobuf.BytesValue prefix_suffix = 27 [(validate.rules) = {
+    bytes: {
+      prefix: "a",
+      suffix: "z"
+    }
+  }];
+  google.protobuf.BytesValue in = 29 [(validate.rules) = {
+    bytes: {
+      in: [
+        "a",
+        "b",
+        "c"
+      ]
+    }
+  }];
+  google.protobuf.BytesValue not_in = 30 [(validate.rules) = {
+    bytes: {
+      not_in: [
+        "x",
+        "y",
+        "z"
+      ]
+    }
+  }];
+  google.protobuf.BytesValue ip = 34 [(validate.rules) = {
+    bytes: {ip: true}
+  }];
+  google.protobuf.BytesValue ipv4 = 35 [(validate.rules) = {
+    bytes: {ipv4: true}
+  }];
+  google.protobuf.BytesValue ipv6 = 36 [(validate.rules) = {
+    bytes: {ipv6: true}
+  }];
+}
